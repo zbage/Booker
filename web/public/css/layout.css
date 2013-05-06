@@ -1,0 +1,112 @@
+body {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	background-color: #9EB34D;
+}
+
+table
+{
+	border-collapse:collapse;
+	color: #FFF;
+}
+table, th, td, tr
+{
+	border: 0px;
+}
+
+td {
+	padding:3px;
+	background-color: #EFFBFE;
+	color: black;
+}
+th {
+	padding:3px;
+	background-color: #5D518C;
+}
+input[type="text"], input[type="password"]
+{
+	width: 96%;
+	margin: auto;
+}
+
+.button {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 12px/50% Verdana, Geneva, sans-serif;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+.button:hover {
+	text-decoration: none;
+}
+.button:active {
+	position: relative;
+	top: 1px;
+}
+
+#side {
+	height:600px;
+	width:180px;
+	float:left;
+}
+#main {
+	height:600px;
+	width:620px;
+	margin-left: 180px;
+	padding-top: 20px;
+}
+
+#side ul {
+	margin: auto 5px;
+	padding: 10px;
+	list-style-type: none;
+	margin-top: 30px;
+}
+
+#side ul li {
+	line-height: 26px;
+	background-color: #5D518C;
+	height: 26px;
+	width: 150px;
+	margin: 2px;
+	padding-top: 0px;
+	padding-right: 8px;
+	padding-bottom: 0px;
+	padding-left: 8px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666;
+	position: relative;
+	font-weight: bold;
+	color: #FFF;
+	border: 1px solid white;
+}
+
+#side a {
+	text-decoration: none;
+	color: #FFF;
+}
+#side a:hover {
+	color: #CF9;
+}
+
+#side ul li ul {
+	display: none;
+	position: absolute;
+	width: 100%;
+	left: 90%;
+	top: 0px;
+}
+
+#side ul li:hover ul {
+	display: block;
+}

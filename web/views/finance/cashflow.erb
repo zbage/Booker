@@ -1,0 +1,93 @@
+<script>
+
+	function _pay(form){
+		var amount = $('pay').value
+		if(amount.match(/^\d+$/))
+			form.submit();
+		else
+			alert('金额 must be numeric!!!');
+	}
+
+	function _income(form){
+		var amount = $('income').value
+		if(amount.match(/^\d+$/))
+			form.submit();
+		else
+			alert('金额 must be numeric!!!');
+	}
+
+</script>
+<div style="width: 400px;margin:auto;margin-top:120px">
+<style>
+	th, td, tr{
+		border: 1px solid white;
+	}
+</style>
+<table>
+	<tr>
+		<th><strong>操作者</strong></th>
+		<th><strong>金额</strong></th>
+		<th><strong>备注</strong></th>
+	</tr>
+	<% @cash.each do |item| %>
+		<tr>
+			<td><%= @users.find1(:id, item.operater_id).real_name %></td>
+			<td><%= item.amount %></td>
+			<td><%= item.comment %></td>			
+		<tr>
+	<% end %>
+	<tr>
+		<td colspan=3 align='right'>
+		Cash: <%=h @cash_in_hand%>&nbsp&nbsp
+		<% 1.upto(@total_page) do |i| %>
+			<a href="/cashflow?page=<%=i%>"><%=i%></a>
+		<% end %>
+		</td>
+	</tr>
+</table>
+<br/><br/>
+<form action='/cashflow' method='post'>
+	<table>
+		<tr>
+			<th rowspan=2>支出</th>
+			<th>金额</th>
+			<th>备注</th>
+			<th/>
+			<input type="hidden" value="pay" name="type"/>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" name="amount" id="pay" style="width:40px"/>
+			</td>
+			<td>
+				<input type="text" name="comment" style="width:240px"/>
+			</td>
+			<td>
+				<input value="确定" type="button" class="button" onclick="javascript:_pay(this.form)"/>
+			</td>
+		</tr>
+	</table>
+</form><br/><br/>
+<form action='/cashflow' method='post'>
+	<table>
+		<tr>
+			<th rowspan=2>收入</th>
+			<th>金额</th>
+			<th>备注</th>
+			<th/>
+			<input type="hidden" value="income" name="type"/>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" name="amount" id="income" style="width:40px"/>
+			</td>
+			<td>
+				<input type="text" name="comment" style="width:240px"/>
+			</td>
+			<td>
+				<input value="确定" type="button" class="button" onclick="javascript:_income(this.form)"/>
+			</td>
+		</tr>
+	</table>
+</form>
+</div>

@@ -1,0 +1,40 @@
+<div style="width: 400px;margin:auto;margin-top:150px">
+<style>
+	th, td, tr{
+		border: 1px solid white;
+	}
+</style>
+<table>
+	<tr>
+		<th>谁吃的</th>
+		<th width='150px'><strong>吃的啥</strong></th>
+		<th><strong>钱</strong></th>
+		<th><strong>日期</strong></th>
+
+	</tr>
+	<% sum = 0%>
+	<% @orders.each do |order| %>
+		<tr>
+			<td><%=h @users.find1(:id, order.user_id).real_name%></td>
+			<td><%=h order.item %></a></td>
+			<td><%=h order.price%></td>
+			<td><%=h order.day%></td>
+		</tr>
+		<% sum = sum + order.price.to_f %>
+	<% end %>
+	<tr>
+		<td colspan=4 align='right'>
+		总共:<%= sum%>
+		</td>
+	</tr>
+</table>
+<br/>
+<table>
+<th>订餐日期</th>
+<th><select onchange='javascript:goto("/viewallorders?day=" + this.value)'>
+	<% @days.each do |day| %>
+		<option value='<%=h day%>' <%=h @day == day ? 'Selected' : ''%>><%=h day%></option>
+	<% end %>
+<select></th>
+</table>
+</div>

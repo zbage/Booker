@@ -1,0 +1,96 @@
+<script>
+	function order(id){
+		var detailSpan = $('detail');
+		var sumSpan = $('sum');
+		
+		var item = $("name" + id).innerText;
+		var price = $("price" + id).innerText;
+		if(detailSpan.innerText == '') 
+			detailSpan.innerText = item + ' ' + price
+		else
+			detailSpan.innerText = detailSpan.innerText + ', ' + item + ' ' + price
+		
+		var sum;
+		if(sumSpan.innerText == '') 
+			sum = 0;
+		else
+			sum = parseFloat(sumSpan.innerText);
+		sumSpan.innerText = sum + parseFloat(price);
+	}
+
+	function resetOrder(){
+		detailSpan = $('detail').innerText = '';
+		sumSpan = $('sum').innerText = '';
+	}
+
+	function submitOrder(form){
+		var detailSpan = $('detail');
+		if(detailSpan.innerText == '')
+			alert("订完餐提交啊 亲！");
+		else {
+			$('sitem').value = $('detail').innerText;
+			$('sprice').value = $('sum').innerText;
+			form.submit();
+		}
+	}
+</script>
+<div style="width: 400px;margin:auto;margin-top:150px">
+<style>
+	th, td, tr{
+		border: 1px solid white;
+	}
+</style>
+
+<table>
+	<tr>
+		<th width='300px'><strong>Name</strong></th>
+		<th><strong>Price</strong></th>
+		<th><strong>订</strong></th>
+	</tr>
+	<% @menus.each do |item| %>
+		<tr>
+			<td id='name<%=h item.id%>'><%=h item.name %></td>
+			<td id='price<%=h item.id%>'><%=h item.price%></td>
+			<td><input value='订' type="button" class="button" onclick="javascript:order(<%=h item.id%>)"/></td>
+		</tr>
+	<% end %>
+	<tr>
+		<td colspan=3 align='right'>
+				<a href='/vieworders'>View My Orders</a>&nbsp&nbsp
+				<% 1.upto(@total_page) do |i| %>
+					<a href="/order?page=<%=i%>"><%=i%></a>
+				<% end %>
+
+		</td>
+	</tr>
+</table>
+<br/>
+<form action='/assist' method='post'>
+<table>
+	<tr>
+		<th>
+			<select name='user_id'>
+				<% @users.each do |user|%>
+					<option value="<%=user.id%>"><%=h user.real_name%></option>
+				<% end %>
+			</select>
+		</th>
+		<th>
+			<span id='detail'/>
+		</th>
+
+		<th>
+			<span id='sum'/>
+		</th>
+	</tr>
+	<tr>
+		<th colspan=3 align='right'>			
+			<input value='重来' type="button" class="button" onclick="javascript:resetOrder()"/>
+			<input value='提交' type="button" class="button" onclick="javascript:submitOrder(this.form)"/>
+		</th>
+	</tr>
+</table>
+	<input type='hidden' id='sitem' name='item'/>
+	<input type='hidden' id='sprice' name='price'/>
+</from>
+</div>

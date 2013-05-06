@@ -1,0 +1,30 @@
+<div style="width: 400px;margin:auto;margin-top:150px">
+<style>
+	th, td, tr{
+		border: 1px solid white;
+	}
+</style>
+<table>
+	<tr>
+		<th><strong>Real Name</strong></th>
+		<th><strong>Email</strong></th>
+		<th><strong>余额</strong></th>
+	</tr>
+	<% @users.each do |user| %>
+		<tr>
+			<td><%= user.real_name %></td>
+			<td><%= user.email %></td>
+			<td><%= user.balance %></td>			
+		<tr>
+	<% end %>
+	<tr>
+		<td colspan=3 align='right'>
+		<% 1.upto(@total_page) do |i| %>
+			<a href="/viewallusers?page=<%=i%>"><%=i%></a>
+		<% end %>
+		</td>
+	</tr>
+</table>
+<br/>
+<a href='/management'>Back</a>
+</div>

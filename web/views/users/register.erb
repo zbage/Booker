@@ -1,0 +1,75 @@
+<script type="text/javascript">
+
+	function verify_and_submit(form)
+	{
+		var alert_msg = ''
+		var user_name = $('userName').value;
+		var real_name = $('realName').value;
+		var email = $('email').value;
+		var password = $('password').value;
+		var password2 = $('password2').value;
+		
+		if(user_name=='')
+		{
+			alert_msg = alert_msg + "You should specify an User Name!\n";
+		}
+		if(real_name=='')
+		{
+			alert_msg = alert_msg + "You should type your Real Name!\n";
+		}
+		if(email=='')
+		{
+			alert_msg = alert_msg + "You should specify an Email!\n";
+		}		
+		if(password=='')
+		{
+			alert_msg = alert_msg + "Password could not be empty\n";
+		}
+		if(password!=password2)
+		{
+			alert_msg = alert_msg + "Passwords should be consistent!\n";
+		}
+		if(alert_msg!='')
+			alert(alert_msg);
+		else
+			form.submit();
+	}
+
+</script>
+
+<div style="width: 400px;margin:auto;margin-top:200px">
+	
+	<form action="/register" method="post">
+		
+		<table width="300px">
+			<tr>
+				<th colspan=2 align='center'>Register</th>
+			</tr>
+			<tr>
+				<td style="padding-left:5px;width:100px">User Name:</td>
+				<td><input type="text" name="user_name" id="userName"/></td>
+			</tr>
+			<tr>
+				<td style="padding-left:5px">Real Name:</td>
+				<td><input type="text" name="real_name" id="realName" size=20/></td>
+			</tr>
+			<tr>
+				<td style="padding-left:5px">Email:</td>
+				<td><input type="text" name="email" id="email" size=20/></td>
+			</tr>	
+			<tr>
+				<td style="padding-left:5px">Password:</td>
+				<td><input type="password" name="password" id="password"/></td>				
+			</tr>
+			<tr>
+				<td style="padding-left:5px">Re-enter Password:</td>
+				<td><input type="password" name="password2" id="password2" size=20/></td>				
+			</tr>
+			<tr>
+				<td colspan=2 align='right'><input value="Go to Login" type="button" class="button" onclick="javascript:goto('login');"/><input value="Register" type="button" class="button" onclick="javascript:verify_and_submit(this.form);"/></td>
+			</tr>
+		</table>
+		
+	</form>
+
+</div>

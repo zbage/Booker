@@ -1,0 +1,34 @@
+<div style="width: 400px;margin:auto;margin-top:150px">
+<style>
+	th, td, tr{
+		border: 1px solid white;
+	}
+</style>
+<table>
+	<tr>
+		<th align="center" colspan=2><strong><%=h @supplier.supplier_name%></strong></th>
+	</tr>
+	<tr>
+		<th width='300px'><strong>Name</strong></th>
+		<th><strong>Price</strong></th>
+	</tr>
+	<% @menu.each do |item| %>
+		<tr>
+			<td><a href="editmenu?id=<%=h item.id%>"><%=h item.name %></a></td>
+			<td><%=h item.price%></td>
+		</tr>
+	<% end %>
+	<tr>
+		<td colspan=2 align='right'>
+		<% 1.upto(@total_page) do |i| %>
+			<a href="/menu?page=<%=i%>&id=<%=@supplier_id%>"><%=i%></a>
+		<% end %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan=2 align='right'>
+			<input value="Add New" type="button" class="button" onclick="javascript:goto('/createmenu?id=<%=h @supplier.id%>');"/>
+		</td>
+	</tr>
+</table>
+</div>

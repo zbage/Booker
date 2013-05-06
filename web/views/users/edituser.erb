@@ -1,0 +1,52 @@
+<script type="text/javascript">
+
+	function verify_and_submit(form)
+	{
+		var alert_msg = ''
+		var real_name = $('realName').value;
+		var email = $('email').value;
+		
+		if(real_name=='')
+		{
+			alert_msg = alert_msg + "You should type your Real Name!\n";
+		}
+		if(email=='')
+		{
+			alert_msg = alert_msg + "You should specify an Email!\n";
+		}		
+		if(alert_msg!='')
+			alert(alert_msg);
+		else
+			form.submit();
+	}
+
+</script>
+<div style="width: 400px;margin:auto;margin-top:120px">
+	
+	<form action="/edituser" method="post">
+		
+		<table width="300px">
+			<tr>
+				<th colspan=2 align='center'>Edit</th>
+			</tr>
+			<tr>
+				<td style="padding-left:5px">Real Name:</td>
+				<td><input type="text" name="real_name" id="realName" value="<%=h @user.real_name%>" size=20/></td>
+			</tr>
+			<tr>
+				<td style="padding-left:5px">Email:</td>
+				<td><input type="text" name="email" id="email" value="<%=h @user.email%>" size=20/></td>
+			</tr>
+			<tr>
+				<td style="padding-left:5px">Balance:</td>
+				<td><%=h @user.balance%></td>
+			</tr>	
+			<tr>
+				<td colspan=2 align='right'>
+					<input value="Update" type="button" class="button" onclick="javascript:verify_and_submit(this.form);"/></td>
+			</tr>
+		</table>
+		
+	</form>
+
+</div>

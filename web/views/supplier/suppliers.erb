@@ -1,0 +1,30 @@
+<div style="width: 400px;margin:auto;margin-top:150px">
+<style>
+	th, td, tr{
+		border: 1px solid white;
+	}
+</style>
+<table>
+	<tr>
+		<th><strong>Supplier Name</strong></th>
+		<th><strong>Phone Number</strong></th>
+		<th><strong>Address</strong></th>
+		<th><strong>Comment</strong></th>
+	</tr>
+	<% @suppliers.each do |supplier| %>
+		<tr>
+			<td><a href="editsupplier?id=<%=h supplier.id%>"><%= supplier.supplier_name %></a></td>
+			<td><%= supplier.phone_number %></td>
+			<td><%= supplier.address %></td>
+			<td><%= supplier.comment %></td>			
+		<tr>
+	<% end %>
+	<tr>
+		<td colspan=4 align='right'>
+		<% 1.upto(@total_page) do |i| %>
+			<a href="/suppliers?page=<%=i%>"><%=i%></a>
+		<% end %>
+		</td>
+	</tr>
+</table>
+</div>

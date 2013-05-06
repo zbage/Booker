@@ -1,0 +1,49 @@
+<script>
+function login(form)
+{
+
+	var alert_msg = ''
+	var user_name = $('userName').value;
+	var password = $('password').value;
+	
+	if(user_name=='')
+	{
+		alert_msg = alert_msg + "You should specify an User Name!\n";
+	}		
+	if(password=='')
+	{
+		alert_msg = alert_msg + "Password could not be empty\n";
+	}
+	if(alert_msg!='')
+		alert(alert_msg);
+	else
+		form.submit();
+}
+</script>
+<div style="width: 400px;margin:auto;margin-top:200px">
+	
+	<form action="/login" method="post">
+		
+		<table width="300px">
+			<tr>
+				<th colspan=2 align='center'>Login</th>
+			</tr>
+			<tr>
+				<td style="padding-left:5px;width:100px">User Name:</td>
+				<td><input type="text" name="user_name" id="userName"/></td>
+			</tr>
+			<tr>
+				<td style="padding-left:5px">Password:</td>
+				<td><input type="password" name="password" id="password"/></td>				
+			</tr>
+			<tr>
+				<td colspan=2 align='right'>
+					<input value="Register" type="button" class="button" onclick="javascript:goto('register')"/>
+					<input value="Login" type="button" class="button" onclick="javascript:login(this.form)"/>
+				</td>
+			</tr>
+		</table>
+		
+	</form>
+
+</div>

@@ -1,0 +1,95 @@
+<script>
+
+	function submit(form){
+		form.submit();
+	}
+
+	function update(form){
+		form.submit();
+	}
+	function deleteuser(form){
+		var select = $('deluser')
+		var real_name = select.options[select.selectedIndex].text;
+		if(confirm("Delete " + real_name + "???"))
+			form.submit();
+	}
+</script>
+<div style="width: 400px;margin:auto;margin-top:150px">
+	<form action='/management' method='post'>
+	<table width="300px">
+		<tr>
+			<th colspan=2 align='center'>Management</th>
+			<input type="hidden" name="id" value="<%= @mgmt.id%>"/>
+		</tr>
+		<tr>
+			<td style="padding-left:5px;width:100px">开放订餐:</td>
+			<td>
+				<select name="open_flag">
+					<option value="true" <%=h @mgmt.open_flag == 'true' ? 'Selected' : ''%>>
+						--开放--
+					</option>
+					<option value="false" <%=h @mgmt.open_flag == 'false' ? 'Selected' : ''%>>
+						--结束--
+					</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding-left:5px">订哪家:</td>
+			<td>
+				<select name="supplier_id">
+					<% @suppliers.each do |supplier|%>
+						<option value="<%=h supplier.id%>" <%=h @mgmt.supplier_id == supplier.id ? 'Selected' : ''%>>
+							<%=h supplier.supplier_name%>
+						</option>
+					<% end %>
+				</select>
+			</td>				
+		</tr>
+		<tr>
+			<td colspan=2 align='right'>
+				<input value="Update" type="button" class="button" onclick="javascript:update(this.form)"/>
+			</td>
+		</tr>
+	</table>
+	</form>
+	<br/>
+	<table>
+			<tr>
+				<th><input value="查看订单" type="button" class="button" onclick="javascript:goto('/viewallorders')"/></th>
+				<th><input value="查看余额" type="button" class="button" onclick="javascript:goto('/viewallusers')"/></th>
+				<th><input value="底余额用户" type="button" class="button" onclick="javascript:goto('/viewlowusers')"/></th>
+			</tr>
+		</table>
+	<br/>
+	<form action='/newadmin' method='post'>
+		<table>
+			<tr>
+				<th>添加管理员</th>
+				<th>
+					<select name='user_id'>
+						<% @users.each do |user|%>
+							<option value="<%=user.id%>"><%=h user.real_name%></option>
+						<% end %>
+					</select>
+				</th>
+				<th><input value="添加管理员" type="button" class="button" onclick="javascript:submit(this.form)"/></th>
+			</tr>
+		</table>
+	</form><br/><br/>
+	<form action='/deleteuser' method='post'>
+		<table>
+			<tr>
+				<th>删 除 用 户</th>
+				<th>
+					<select name='user_id' id='deluser'>
+						<% @users.each do |user|%>
+							<option value="<%=user.id%>"><%=h user.real_name%></option>
+						<% end %>
+					</select>
+				</th>
+				<th><input value="删除用户" type="button" class="button" onclick="javascript:deleteuser(this.form)"/></th>
+			</tr>
+		</table>
+	</form>
+</div>

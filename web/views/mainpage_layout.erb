@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>订饭啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦</title>
+<head>
+	<link href="css/layout.css" rel="stylesheet" type="text/css">
+	<script src="js/booker.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<div style="margin:auto;width:800px;height:600px">
+		<div id="side">
+			<div style="margin-top:150px">
+			<ul>
+				<li><a href="/order">订餐</a></li>
+				<li><a href="/edituser">查看个人信息</a></li>
+				<% if session[:user].role == 'admin' %>
+				<li><a href="/today">今日订单</a></li>
+				<li><a href="/assist">帮别人订餐</a></li>
+				<li><a href="/management">管理</a></li>
+				<li><a href="/suppliers">供应商列表</a></li>
+				<li><a href="/createsupplier">新建供应商</a></li>
+				<li><a href="/finance">账目</a></li>
+				<% end %>
+				<li><a href="/logout">Logout</a></li>
+            </ul>
+        	</div>
+		</div>
+		<div id="main"><%=yield%></div>
+		
+	</div>
+</body>
+</html>

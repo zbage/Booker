@@ -1,0 +1,55 @@
+<script type="text/javascript">
+
+	function verify_and_submit(form)
+	{
+		var alert_msg = '';
+		var supplier_name = $('supplier_name').value;
+		if(supplier_name=='')
+		{
+			alert_msg = alert_msg + "Supplier Name can not be empty!\n";
+		}
+		var phone_number = $('phone_number').value;
+		if(phone_number=='')
+		{
+			alert_msg = alert_msg + "Phone Number can not be empty!\n";
+		}
+
+		if(alert_msg!='')
+			alert(alert_msg);
+		else
+			form.submit();
+	}
+
+</script>
+<div style="width: 400px;margin:auto;margin-top:150px">
+	
+	<form action="/createsupplier" method="post">
+		
+		<table width="300px">
+			<tr>
+				<th colspan=2 align='center'>Create New Supplier</th>
+			</tr>
+					<tr>
+				<td style="padding-left:5px;width:100px">Supplier Name</td>
+				<td><input type="text" name="supplier_name" id="supplier_name"/></td>
+			</tr>
+					<tr>
+				<td style="padding-left:5px;width:100px">Phone Number</td>
+				<td><input type="text" name="phone_number" id="phone_number"/></td>
+			</tr>
+					<tr>
+				<td style="padding-left:5px;width:100px">#Address</td>
+				<td><input type="text" name="address" id="address"/></td>
+			</tr>
+					<tr>
+				<td style="padding-left:5px;width:100px">#Comment</td>
+				<td><input type="text" name="comment" id="comment"/></td>
+			</tr>
+		<tr>
+				<td colspan=2 align='right'><input value="Create" type="button" class="button" onclick="javascript:verify_and_submit(this.form);"/></td>
+			</tr>
+		</table>
+		
+	</form>
+
+</div>

@@ -1,0 +1,40 @@
+<div style="width: 400px;margin:auto;margin-top:150px">
+<style>
+	th, td, tr{
+		border: 1px solid white;
+	}
+</style>
+<table>
+	<tr>
+		<th width='150px'><strong>吃的啥</strong></th>
+		<th><strong>钱</strong></th>
+		<th><strong>日期</strong></th>
+	</tr>
+	<% @orders.each do |order| %>
+		<tr>
+			<td><%=h order.item %></a></td>
+			<td><%=h order.price%></td>
+			<td><%=h order.day%></td>
+		</tr>
+	<% end %>
+	<tr>
+		<td colspan=3 align='right'>
+		<% 1.upto(@total_page) do |i| %>
+			<a href="/vieworders?page=<%=i%>"><%=i%></a>
+		<% end %>
+		</td>
+	</tr>
+</table>
+<br/><br/>
+<table>
+	<% @cancelable_orders.each do |order|%>
+		<tr>
+			<td><%=h order.item%></td>
+			<td><%=h order.price%></td>
+			<td><%=h order.day%></td>
+			<td>今日订单</td>
+		</tr>
+	<% end %>
+</table>
+
+</div>

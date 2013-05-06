@@ -1,0 +1,57 @@
+<script>
+
+	function submit(form){
+		form.submit();
+	}
+
+</script>
+<style>
+	th, td, tr{
+		border: 1px solid white;
+	}
+</style>
+<div style="width: 400px;margin:auto;margin-top:150px">
+	<table>
+		<tr>
+			<th width='150px'>姓名</th><th>邮箱</th><th>余额</th>
+		</tr>
+		<% @users.each do |user|%>
+			<tr>
+				<td><%=h user.real_name%></td>
+				<td><%=h user.email%></td>
+				<td><%=h user.balance%></td>
+			</tr>
+		<% end%>
+		<tr>
+			<td colspan=3 align='right'>
+				<% 1.upto(@total_page) do |i| %>
+					<a href="/finance?page=<%=i%>"><%=i%></a>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+	<br/><br/>	
+	<form action='/charge' method='post'>
+		<table>
+			<tr>
+				<th>充值</th>
+				<th>
+					<select name='user_id'>
+						<% @users.each do |user|%>
+							<option value="<%=user.id%>"><%=h user.real_name%></option>
+						<% end %>
+					</select>
+				</th>
+				<th>
+					<input type="text" name="balance" style="width:50px" id="balance"/>
+				</th>
+				<th>
+					<input value="充值" type="button" class="button" onclick="javascript:submit(this.form)"/>
+				</th>
+				<th>
+					<input value="现金" type="button" class="button" onclick="javascript:goto('/cashflow')"/>
+				</th>
+			</tr>
+		</table>
+	</form>
+</div>

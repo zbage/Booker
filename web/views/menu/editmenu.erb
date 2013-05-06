@@ -1,0 +1,57 @@
+<script type="text/javascript">
+
+	function verify_and_submit(form)
+	{
+		var alert_msg = '';
+			var name = $('name').value;
+		if(name=='')
+		{
+			alert_msg = alert_msg + "Name can not be empty!\n";
+		}
+			var price = $('price').value;
+		if(price=='')
+		{
+			alert_msg = alert_msg + "Price can not be empty!\n";
+		}
+					if(alert_msg!='')
+			alert(alert_msg);
+		else
+			form.submit();
+	}
+	function delete_menu()
+	{
+		if(confirm("Delete <%=h @menu.name%>?"))
+			$('delete').submit();
+	}
+</script>
+<div style="width: 400px;margin:auto;margin-top:200px">
+	
+	<form action="/editmenu" method="post">
+		
+		<table width="300px">
+			<tr>
+				<th colspan=2 align='center'><%=h @supplier.supplier_name%></th>
+				<input type="hidden" name="id" value="<%=@menu.id%>"/>
+				<input type="hidden" name="supplier_id" value="<%=@supplier.id%>"/>
+			</tr>
+					<tr>
+				<td style="padding-left:5px;width:100px">Name</td>
+				<td><input type="text" name="name" id="name" value="<%=@menu.name%>"/></td>
+			</tr>
+					<tr>
+				<td style="padding-left:5px;width:100px">Price</td>
+				<td><input type="text" name="price" id="price" value="<%=@menu.price%>"/></td>
+			</tr>
+		<tr>
+				<td colspan=2 align='right'>
+					<input value="Delete" type="button" class="button" onclick="javascript:delete_menu();"/>
+					<input value="Update" type="button" class="button" onclick="javascript:verify_and_submit(this.form);"/>
+				</td>
+			</tr>
+		</table>
+		
+	</form>
+	<form id='delete' action="/deletemenu" method="post">
+		<input type="hidden" name="id" value="<%=h @menu.id%>"/>
+	</form>
+</div>

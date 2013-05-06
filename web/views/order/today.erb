@@ -1,0 +1,46 @@
+<script>
+	function deleteOrder(id){
+		var realName = $('realName' + id).innerText;
+		var item = $('item' + id).innerText;
+		if(confirm("Cancel " + realName + ": " + item + "???")) {
+			$('orderId').value = id;
+			$('form1').submit();
+		}
+	}
+</script>
+<div style="width: 400px;margin:auto;margin-top:150px">
+<style>
+	th, td, tr{
+		border: 1px solid white;
+	}
+</style>
+<table>
+	<tr>
+		<th>谁吃的</th>
+		<th width='150px'><strong>吃的啥</strong></th>
+		<th><strong>钱</strong></th>
+		<th><strong>日期</strong></th>
+		<th><strong>取消</strong></th>
+	</tr>
+	<% sum = 0%>
+	<% @orders.each do |order| %>
+		<tr>
+			<td id='realName<%=order.id%>'><%=h @users.find1(:id, order.user_id).real_name%></td>
+			<td id='item<%=order.id%>'><%=h order.item %></a></td>
+			<td><%=h order.price%></td>
+			<td><%=h order.day%></td>
+			<td><input type='button' class='button' value='Cancel' onclick="javascript:deleteOrder(<%= order.id%>)"/></td>
+		</tr>
+		<% sum = sum + order.price.to_f %>
+	<% end %>
+	<tr>
+		<td colspan=5 align='right'>
+		总共:<%= sum%>
+		<% 1.upto(@total_page) do |i| %>
+			<a href="/taday?page=<%=i%>"><%=i%></a>
+		<% end %>
+		</td>
+	</tr>
+</table>
+<form action='/cancelorder' method='post' id='form1'><input type='hidden' name='order_id' id='orderId'></form>
+</div>
