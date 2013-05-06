@@ -6,6 +6,7 @@ class Booker
 		split_user = SplitPage.new(Users.all, 8)
 		@users = split_user.get_page page
 		@total_page = split_user.total_page
+		@uuu = Users
 		erb :'finance/finance', :layout => :mainpage_layout
 	end
 
