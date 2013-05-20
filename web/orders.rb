@@ -24,6 +24,7 @@ class Booker
 			else
 				split_menu = SplitPage.new(Menu.find(:supplier_id, mgmt.supplier_id), 8)
 				page = params[:page].nil? ? 1 : params[:page].to_i
+				@supplier = Suppliers.find1(:id, mgmt.supplier_id)
 				@menus = split_menu.get_page page
 				@total_page = split_menu.total_page
 				erb :'order/order', :layout => :mainpage_layout
@@ -60,6 +61,17 @@ class Booker
 			erb :note, :layout => :mainpage_layout
 		end
 	end
+
+	post "/usercreatemenu" do
+		login?
+		Menu.new(params).insert
+		@msg = "Created successfully!!!"
+		@where_you_go = "/order"
+		@url_text = 'Order Meal'
+		erb :note, :layout => :mainpage_layout
+	end
+
+
 
 	get '/vieworders' do
 		login?
